@@ -17,6 +17,24 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const startNewAssessment = () => {
+    if (isGuest) {
+      navigate('/auth');
+      return;
+    }
+    // Prompt for ticker or just go to portfolio to pick one
+    const assetsRaw = localStorage.getItem(`ts_assets_${user?.id}`);
+    const assets = assetsRaw ? JSON.parse(assetsRaw) : [];
+    
+    if (assets.length === 0) {
+      showToast('请先在“资产”页面添加一个标的');
+      navigate('/portfolio');
+    } else {
+      showToast('请选择一个资产进行风险评估');
+      navigate('/portfolio');
+    }
+  };
+
   return (
     <div className="relative min-h-screen pb-32 pt-10 px-6 overflow-y-auto no-scrollbar">
       <header className="flex justify-between items-start mb-8">
@@ -27,7 +45,7 @@ const Dashboard: React.FC = () => {
           </h1>
         </div>
         <button 
-          onClick={() => handleRestrictedAction('/portfolio')}
+          onClick={startNewAssessment}
           className="flex items-center gap-2 bg-white/60 dark:bg-slate-800/60 border border-white dark:border-slate-700 py-2.5 px-4 rounded-full shadow-sm glass-panel active:scale-95 transition-all"
         >
           <span className="material-symbols-outlined text-primary text-[22px]">add_circle</span>
