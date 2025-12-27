@@ -1,0 +1,7 @@
+{
+  "name": "Copy of TradeSystem - Professional Trading Framework",
+  "description": "A high-end trading management and risk assessment platform featuring portfolio tracking, journaling, and AI-assisted trading evaluations.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
